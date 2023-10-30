@@ -1,0 +1,36 @@
+{% extends "layouts/base.html" %}
+
+{% load static %}
+
+{% block title %} Home Page {% endblock %}
+
+{% block 'content' %} {% endblock %}
+
+{% block 'body' %}
+
+<style>
+  /* CSS to set a fixed height for product images */
+  .product-card img {
+    height: 200px; /* You can adjust the height as needed */
+    width: auto;
+  }
+</style>
+<div class="row">
+  {% for product in products_db %}
+  <div class="col-md-4">
+    <div class="card mb-4 product_card">
+      <img src="{{ product.get_image }}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{ product.title }}</h5>
+        <a href="{{ product.more_details }}" class="btn btn-primary">More Details</a>
+        <a href="{{ product.delete_product }}" class="btn btn-danger">Delete</a>
+      </div>
+    </div>
+  </div>
+  {% if forloop.counter|divisibleby:3 and not forloop.last %}
+  </div>
+  <div class="row">
+  {% endif %}
+  {% endfor %}
+</div>
+{% endblock %}
